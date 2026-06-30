@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits } = require("discord.js");
 const fs = require("fs");
-const config = require("./config.json");
+const token = process.env.TOKEN;
+console.log("TOKEN LOADED:", !!token);
 
 const client = new Client({
     intents: [
@@ -61,4 +62,6 @@ client.on("messageCreate", (message) => {
     }
 });
 
-client.login(config.token);
+client.login(token)
+    .then(() => console.log("Bot logged in successfully"))
+    .catch(err => console.error("LOGIN ERROR:", err));
